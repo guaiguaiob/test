@@ -46,5 +46,6 @@ var app = {
 
         console.log('Received Event: ' + id + ' !!');
         test_init();
+        startMonitoring();
     }
 };
