@@ -33,7 +33,7 @@ function onMonitoringError(message) {
 }
 
 function startMonitoring() {
-  estimote.beacons.startMonitoringForRegion (
+  EstimoteBeacons.startMonitoringForRegion (
     {}, // Empty region matches all beacons.
     function(result) {
       console.log('*** Beacons monitored ***')
@@ -44,7 +44,7 @@ function startMonitoring() {
 }
 
 function stopMonitoring() {
-  estimote.beacons.stopMonitoringForRegion(
+  EstimoteBeacons.stopMonitoringForRegion(
     {},
      function(result) {
        console.log('*** Beacons monitoring stopped ***')
@@ -54,7 +54,7 @@ function stopMonitoring() {
 }
 
 function startRanging() {
-  estimote.beacons.startRangingBeaconsInRegion(
+  EstimoteBeacons.startRangingBeaconsInRegion(
     {}, // Empty region matches all beacons.
     function(result) {
       console.log('*** Beacons ranged ***')
@@ -65,7 +65,7 @@ function startRanging() {
 }
 
 function stopRanging() {
-  estimote.beacons.stopRangingBeaconsInRegion(
+  EstimoteBeacons.stopRangingBeaconsInRegion(
     {},
     function(result) {
       console.log('*** Beacons ranging stopped ***')
