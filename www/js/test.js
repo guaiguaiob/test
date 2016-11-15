@@ -15,11 +15,29 @@ function onPhotoDataSuccess(imageData) {
   smallImage.src = "data:image/jpeg;base64," + imageData;
 }
 
-function onFail(message) {
+function onPhotoFail(message) {
   alert('Failed because: ' + message);
 }
 
 function capturePhotoWithData() {
   console.log('capturePhotoWithData');
-  navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+  navigator.camera.getPicture(onPhotoDataSuccess, onPhotoFail, { quality: 50 });
+}
+
+function onMonitoringSuccess(regionState) {
+  console.log('State is ' + regionState.state)
+}
+
+function onMonitoringError(message) {
+  alert('Failed because: ' + message);
+}
+
+function startMonitoring() {
+  estimote.beacons.startRangingBeaconsInRegion(
+    {}, // Empty region matches all beacons.
+    function(result) {
+        console.log('*** Beacons ranged ***')
+        estimote.beacons.printObject(result) },
+    function(errorMessage) {
+        console.log('Ranging error: ' + errorMessage) });
 }
