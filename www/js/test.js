@@ -36,39 +36,40 @@ function startMonitoring() {
   estimote.beacons.startMonitoringForRegion (
     {}, // Empty region matches all beacons.
     function(result) {
-        console.log('*** Beacons monitored ***')
-        console.log(result);
-        estimote.beacons.printObject(result) },
+      console.log('*** Beacons monitored ***')
+      console.log(result);
+      estimote.beacons.printObject(result) },
     function(errorMessage) {
-        console.log('Monitoring error: ' + errorMessage) });
+      console.log('Monitoring error: ' + errorMessage) });
 }
 
 function stopMonitoring() {
   estimote.beacons.stopMonitoringForRegion(
     {},
      function(result) {
-        console.log('*** Beacons monitoring stopped ***')
-        console.log(result)},
+       console.log('*** Beacons monitoring stopped ***')
+       console.log(result)},
     function(errorMessage) {
-        console.log('Stop monitoring error: ' + errorMessage) });
+       console.log('Stop monitoring error: ' + errorMessage) });
 }
 
 function startRanging() {
   estimote.beacons.startRangingBeaconsInRegion(
     {}, // Empty region matches all beacons.
     function(result) {
-        console.log('*** Beacons ranged ***')
-        estimote.beacons.printObject(result) },
+      console.log('*** Beacons ranged ***')
+      console.log(result);
+      estimote.beacons.printObject(result) },
     function(errorMessage) {
-        console.log('Ranging error: ' + errorMessage) });
+      console.log('Ranging error: ' + errorMessage) });
 }
 
 function stopRanging() {
   estimote.beacons.stopRangingBeaconsInRegion(
     {},
     function(result) {
-        console.log('*** Beacons ranging stopped ***')
-        console.log(result) },
+      console.log('*** Beacons ranging stopped ***')
+      console.log(result) },
     function(errorMessage) {
-        console.log('Stop ranging error: ' + errorMessage) });
+      console.log('Stop ranging error: ' + errorMessage) });
 }
