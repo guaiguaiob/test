@@ -50,7 +50,6 @@
     <plugin name="cordova-plugin-vibration"           source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist"           source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-estimote-v2"         source="npm" spec="~0.9.3" />
-    <plugin name="ptdev.makingwaves2.estimotes"       source="pgb" spec="1.0.1" />
 
     <!-- Define app icon and splashscreen for each platform. -->
     <icon src="icon.png" />
