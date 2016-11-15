@@ -46,5 +46,9 @@ var app = {
 
         console.log('Received Event: ' + id + ' !!');
         test_init();
+        hello.greet("World", 
+                    function(message) {alert(message);}, 
+                    function() {alert("Error calling Hello Plugin");}
+                   );
     }
 };
