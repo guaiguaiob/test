@@ -45,7 +45,6 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id + ' !!');
-        test_init();
         iiibeacon.greet("World", 
                     function(message) {alert(message);}, 
                     function() {alert("Error calling Hello Plugin");}
