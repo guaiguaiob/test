@@ -54,22 +54,27 @@ function stopMonitoring() {
 }
 
 function startRanging() {
-  EstimoteBeacons.startRangingBeaconsInRegion(
-    {}, // Empty region matches all beacons.
+  iiibeacon.startRanging(
     function(result) {
       console.log('*** Beacons ranged ***')
       console.log(result);
-      estimote.beacons.printObject(result) },
     function(errorMessage) {
       console.log('Ranging error: ' + errorMessage) });
 }
 
 function stopRanging() {
-  EstimoteBeacons.stopRangingBeaconsInRegion(
-    {},
+  iiibeacon.stopRanging(
     function(result) {
       console.log('*** Beacons ranging stopped ***')
       console.log(result) },
     function(errorMessage) {
       console.log('Stop ranging error: ' + errorMessage) });
+}
+  
+function getBeacons() {
+  iiibeacon.getBeacons(
+    function(result){
+      console.log(result) },
+    function(errorMessage){
+      console.log('getBeacons error: ' + errorMessage)});
 }
