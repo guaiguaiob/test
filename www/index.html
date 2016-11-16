@@ -43,13 +43,14 @@
 </head>
 
 <body>
-    <button onclick="startRanging();">Start Ranging</button> <br>
-    <button onclick="stopRanging();">Stop Ranging</button> <br>
     <div class="app">
         <h1>PhoneGap</h1>
         <div id="deviceready" class="blink">
             <p class="event listening">Connecting to Device</p>
             <p class="event received">Device Is Ready</p>
+            <button onclick="startRanging();">Start Ranging</button> <br>
+            <button onclick="stopRanging();">Stop Ranging</button> <br>
+            <button onclick="getBeacons();">Get Beacons</button> <br>
         </div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
