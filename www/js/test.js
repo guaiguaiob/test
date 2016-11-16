@@ -6,7 +6,7 @@ function init_iiibeacon() {
 }
 
 function startRanging() {
-  iiibeacon.startRanging(
+  navigator.iiibeacon.startRanging(
     function(result) {
       console.log('*** Beacons ranged ***')
       console.log(JSON.stringify(result)) },
@@ -15,7 +15,7 @@ function startRanging() {
 }
 
 function stopRanging() {
-  iiibeacon.stopRanging(
+  navigator.iiibeacon.stopRanging(
     function(result) {
       console.log('*** Beacons ranging stopped ***')
       console.log(result) },
@@ -24,7 +24,7 @@ function stopRanging() {
 }
   
 function getBeacons() {
-  iiibeacon.getBeacons(
+  navigator.iiibeacon.getBeacons(
     function(result){
       console.log(JSON.stringify(result)) },
     function(errorMessage){
