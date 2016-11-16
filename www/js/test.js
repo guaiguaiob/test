@@ -1,3 +1,10 @@
+function init_iiibeacon() {
+    navigator.iiibeacon.init( 
+        function(message) {console.log(message);}, 
+        function() {console.log("Error calling iiibeacon Plugin");}
+    );
+}
+
 function startRanging() {
   iiibeacon.startRanging(
     function(result) {
