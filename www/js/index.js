@@ -50,7 +50,7 @@ var app = {
                     function(message) {alert(message);}, 
                     function() {alert("Error calling iiibeacon Plugin");}
                    );*/
-        iiibeacon.init( 
+        navigator.iiibeacon.init( 
                     function(message) {alert(message);}, 
                     function() {alert("Error calling iiibeacon Plugin");}
                    );
