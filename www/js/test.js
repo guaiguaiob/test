@@ -2,7 +2,7 @@ function startRanging() {
   iiibeacon.startRanging(
     function(result) {
       console.log('*** Beacons ranged ***')
-      console.log(result) },
+      console.log(JSON.stringify(result)) },
     function(errorMessage) {
       console.log('Ranging error: ' + errorMessage) });
 }
@@ -19,7 +19,7 @@ function stopRanging() {
 function getBeacons() {
   iiibeacon.getBeacons(
     function(result){
-      console.log(result) },
+      console.log(JSON.stringify(result)) },
     function(errorMessage){
       console.log('getBeacons error: ' + errorMessage)});
 }
