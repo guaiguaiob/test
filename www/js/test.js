@@ -34,7 +34,8 @@ function getBeacons() {
 function getCurrentPosition() {
   navigator.iiibeacon.getCurrentPosition(
     function(result){
-      console.log(JSON.stringify(result)) },
+      console.log(JSON.stringify(result))
+      alert(JSON.stringify(result))},
     function(errorMessage){
       console.log('getCurrentPosition error: ' + errorMessage)});
 }
