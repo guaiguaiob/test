@@ -30,3 +30,11 @@ function getBeacons() {
     function(errorMessage){
       console.log('getBeacons error: ' + errorMessage)});
 }
+
+function getCurrentPosition() {
+  navigator.iiibeacon.getCurrentPosition(
+    function(result){
+      console.log(JSON.stringify(result)) },
+    function(errorMessage){
+      console.log('getCurrentPosition error: ' + errorMessage)});
+}
