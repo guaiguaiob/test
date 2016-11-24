@@ -39,3 +39,21 @@ function getCurrentPosition() {
     function(errorMessage){
       console.log('getCurrentPosition error: ' + errorMessage)});
 }
+
+function watchPosition() {
+  navigator.iiibeacon.watchPosition(
+    function(result) {
+      console.log('*** New Position ***')
+      console.log(JSON.stringify(result)) },
+    function(errorMessage) {
+      console.log('watch error: ' + errorMessage) });
+}
+
+function clearWatch() {
+  navigator.iiibeacon.clearWatchPosition(
+    function(result) {
+      console.log('*** clear watch done ***')
+      console.log(result) },
+    function(errorMessage) {
+      console.log('Clear watch error: ' + errorMessage) });
+}
