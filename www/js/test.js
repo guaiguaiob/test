@@ -57,3 +57,13 @@ function clearWatch() {
     function(errorMessage) {
       console.log('Clear watch error: ' + errorMessage) });
 }
+
+function lcrScan() {
+  lcr.scan(
+    function(result) {
+      console.log('*** lcr scan done ***')
+      console.log(result) },
+    function(errorMessage) {
+      console.log('lcr scan error: ' + errorMessage) }
+  );
+}
