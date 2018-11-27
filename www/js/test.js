@@ -143,3 +143,18 @@ function getKeys(name, callback) {
     callback && callback('storage ' + name + ' is not existed');
   }
 }
+
+function testStorage() {
+  var name = 'printer';
+  initStorage(name, function(err,rst) {
+    if(!err) {
+      setData(name, 'aa', '123', function(err2, rst2) {
+        if(!err) {
+          getData(name, 'aa', function(err3, rst3) {
+            console.log('test storage done');
+          })
+        }
+      })
+    }
+  })
+}
