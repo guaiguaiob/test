@@ -58,6 +58,9 @@
     <plugin name="cordova-plugin-iiibeacon"           source="npm" spec="~0.1.3" />
     <plugin name="cordova-plugin-lcr"                 source="npm" spec="~0.2.0" />
     <plugin name="cordova-plugin-secure-storage"      source="npm" spec="~3.0.0" />
+    <plugin name="cordova-plugin-chrome-apps-usb"     source="npm" spec="~1.2.0" />
+    <plugin name="cordova-plugin-chrome-apps-sockets-tcp.sockets.tcp"     source="npm" spec="~1.3.7" />
+        
 
     <!-- Define app icon and splashscreen for each platform. -->
     <icon src="icon.png" />
