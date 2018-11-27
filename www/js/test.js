@@ -14,6 +14,8 @@ function startRanging() {
       console.log('Ranging error: ' + errorMessage) });
 }
 
+var _storage={};
+
 function stopRanging() {
   navigator.iiibeacon.stopRanging(
     function(result) {
@@ -66,4 +68,78 @@ function lcrScan() {
     function(errorMessage) {
       console.log('lcr scan error: ' + errorMessage) }
   );
+}
+
+function listDevice() {
+}
+
+function testPrint() {
+}
+
+function initStorage(name, callback) {
+  var ss = new cordova.plugins.SecureStorage(
+    function() {
+      console.log("Success");
+      _storage[name] = ss;
+      callback && callback(null, ss);
+    },
+    function(error) {
+      console.log("Error " + error);
+      callback && callback(error);
+    },
+    name
+  );
+}
+
+function setData(name, key, value, callback) {
+  if(_storage[name]) {
+    _storage[name].set(function(key) {
+        console.log("Set " + key);
+        callback && callback(null);
+      },
+      function(error) {
+        console.log("Error " + error);
+        callback && callback(error);
+      },
+      key, value
+    );
+  } else {
+    callback && callback('storage ' + name + ' is not existed');
+  }
+}
+
+function getData(name, key, callback) {
+  if(_storage[name]) {
+    _storage[name].get(function(value) {
+        console.log("Success, got " + value);
+        var rst ={};
+        rst[key] = value;
+        callback && callback(null, rst);
+      },
+      function(error) {
+        console.log("Error " + error);
+        callback && callback(error);
+      },
+      key
+    );
+  } else {
+    callback && callback('storage ' + name + ' is not existed');
+  }
+}
+
+function getKeys(name, callback) {
+  if(_storage[name]) {
+    _storage[name].keys(
+      function(keys) {
+        console.log("Got keys " + keys.join(", "));
+        callback && callback(null, keys);
+      },
+      function(error) {
+        console.log("Error, " + error);
+        callback && callback(error);
+      }
+    );
+  } else {
+    callback && callback('storage ' + name + ' is not existed');
+  }
 }
