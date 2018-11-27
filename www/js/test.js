@@ -71,9 +71,91 @@ function lcrScan() {
 }
 
 function listDevice() {
+  var deviceFilter = [
+        //gprint
+        { vendorId: 34918, productId: 256, interfaceClass: 7 },
+        { vendorId: 1137, productId: 85, interfaceClass: 7 },
+        { vendorId: 6790, productId: 30084, interfaceClass: 7 },
+        { vendorId: 26728, productId: 256, interfaceClass: 7 },
+        { vendorId: 26728, productId: 512, interfaceClass: 7 },
+        { vendorId: 26728, productId: 768, interfaceClass: 7 },
+        { vendorId: 26728, productId: 1024, interfaceClass: 7 },
+        { vendorId: 26728, productId: 1280, interfaceClass: 7 },
+        { vendorId: 26728, productId: 1536, interfaceClass: 7 },
+        //epson
+        { vendorId: 1208, productId: 3601, interfaceClass: 7 },
+        //xprinter
+        { vendorId: 1659, interfaceClass: 7, interfaceSubclass: 1 },
+        { vendorId: 1046, interfaceClass: 7, interfaceSubclass: 1 },
+        { vendorId: 7358, interfaceClass: 7, interfaceSubclass: 1 },
+        { vendorId: 1155, interfaceClass: 7, interfaceSubclass: 1 },
+        { vendorId: 8137, interfaceClass: 7, interfaceSubclass: 1 }
+      ];
+  var _devices = [];
+  chrome.usb.getDevices({ filters: deviceFilter }, function (devices) {
+    for (var index = 0; index < devices.length; index++) {
+      _devices.push(devices[index]);
+    }
+    console.log(JSON.stringify(_devices));
+    if(_devices.length>0) {
+      testStorage('prn1', JSON.stringify(_devices[0]))
+    }
+  });
 }
 
 function testPrint() {
+  var buf = "\x1d\x21\x11\x70\x72\x69\x6e\x74\x0a\x0a\x0a\x0a\x0a\x0a\x0a\x1d\x56\x00";
+  uint8array = new Uint8Array(buf.length);
+  for (var i = 0; i < buf.length; i++) uint8array[i] = buf.charCodeAt(i);
+  
+  getData('printer', 'prn1', function(err,rst){
+    if(!err) {
+      var device = JSON.parse(rst.prn1);
+      chrome.usb.openDevice(device, function(handle){
+        chrome.usb.listInterfaces(handle, function (interfaceDescriptors) {
+          var inEndpoint = null;
+          var outEndpoint = null;
+          for (var index = 0; index < interfaceDescriptors.length; index++) {
+            var interface = interfaceDescriptors[index];
+            for (var i = 0; i < interface.endpoints.length; i++) {
+              var endpointDescriptor = interface.endpoints[i];
+              if (endpointDescriptor.type == "bulk") {
+                if (endpointDescriptor.direction == "out") {
+                  outEndpoint = endpointDescriptor;
+                } else if (endpointDescriptor.direction == "in") {
+                  inEndpoint = endpointDescriptor;
+                }
+              }
+              if (inEndpoint != null && outEndpoint != null) {
+                chrome.usb.claimInterface(
+                  handle,
+                  interface.interfaceNumber,
+                  function () {
+                    chrome.usb.bulkTransfer(
+                      handle,
+                      {
+                        direction: "out",
+                        endpoint: outEndpoint.address,
+                        data: uint8array.buffer
+                      },
+                      function (info) {
+                        console.log(JSON.stringify(info));
+                        chrome.usb.releaseInterface(
+                          handle,
+                          interface.interfaceNumber,
+                          function () { }
+                        );
+                      }
+                    );
+                  }
+                );
+              }
+            }
+          }
+        })
+      })
+    }
+  })
 }
 
 function initStorage(name, callback) {
@@ -144,13 +226,15 @@ function getKeys(name, callback) {
   }
 }
 
-function testStorage() {
+function testStorage(key, value) {
+  if(!key) key = 'aaa';
+  if(!value) value = '123';
   var name = 'printer';
   initStorage(name, function(err,rst) {
     if(!err) {
-      setData(name, 'aa', '123', function(err2, rst2) {
+      setData(name, key, value, function(err2, rst2) {
         if(!err) {
-          getData(name, 'aa', function(err3, rst3) {
+          getData(name, key, function(err3, rst3) {
             console.log('test storage done');
           })
         }
