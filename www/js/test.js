@@ -158,6 +158,55 @@ function testPrint() {
   })
 }
 
+var serial=3001;
+function testBTPrint() {
+    var logo,logo2,btPrinter;
+    localPrn.Image.load('http://bn.tagfans.com/tmp/lprn/logo.png',function(img){
+        if(img instanceof localPrn.Image)
+            logo=img;
+        localPrn.Image.load('http://bn.tagfans.com/tmp/lprn/logo2.png',function(img2){
+            if(img2 instanceof localPrn.Image)
+                logo2=img2;
+            btPrinter = localPrn.createPrinter({btName:'Printer_57B6', btAddress:'DC:1D:30:40:57:B6'});
+            if(btPrinter) {
+                serial++;
+                btPrinter
+                    .align('ct')
+                    .size(2,2)
+                    .text('您的號碼是\n\n')
+                    .size(4,4)
+                    .text(''+serial+'\n\n')
+                    .size(2,2)
+                    .text('請等候叫號\n\n');
+                logo&&btPrinter
+                    .raster(logo)
+                    .text('\n\n\n');
+                btPrinter.cut().flush();
+                serial++;
+                btPrinter
+                    .upsideDown(1)
+                    .align('ct')
+                logo2&&btPrinter
+                    .raster(logo2)
+                    .text('\n');
+                btPrinter
+                    .size(2,2)
+                    .text('請等候叫號\n\n')
+                    .size(4,4)
+                    .text(''+serial+'\n\n')
+                    .size(2,2)
+                    .text('您的號碼是\n\n')
+                    .text('\n\n');
+                    .cut()
+                    .upsideDown(0)
+                    .flush();
+            } else {
+                console.log('no BT printer')
+            }
+        })
+    });
+}
+
 function initStorage(name, callback) {
   var ss = new cordova.plugins.SecureStorage(
     function() {
