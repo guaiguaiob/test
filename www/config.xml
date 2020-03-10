@@ -61,6 +61,7 @@
     <plugin name="cordova-plugin-secure-storage"      source="npm" spec="~3.0.0" />
     <plugin name="cordova-plugin-chrome-apps-usb"     source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-chrome-apps-sockets-tcp"     source="npm" spec="~1.3.7" />
+    <plugin name="Cordova-Plugin-BTPrinter" spec="https://github.com/apache/cordova-plugin-device.git" />
 
     <!-- Define app icon and splashscreen for each platform. -->
     <icon src="icon.png" />
