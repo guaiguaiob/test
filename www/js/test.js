@@ -196,7 +196,7 @@ function testBTPrint() {
                     .text(''+serial+'\n\n')
                     .size(2,2)
                     .text('您的號碼是\n\n')
-                    .text('\n\n');
+                    .text('\n\n')
                     .cut()
                     .upsideDown(0)
                     .flush();
